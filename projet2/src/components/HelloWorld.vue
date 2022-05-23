@@ -5,11 +5,28 @@
 </template>
 
 <script>
+import axios from "axios"
+
 export default {
   name: 'HelloWorld',
   props: {
     msg: String
-  }
+  },
+
+  data () {
+    return {
+      episode: null,
+      nulberEpisode: null,
+
+    }
+  },
+
+created() {
+  axios
+    .get('https://api.coindesk.com/v1/bpi/currentprice.json')
+    .then(response => (this.info = response))
+}
+
 }
 </script>
 
