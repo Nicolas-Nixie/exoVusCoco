@@ -4,10 +4,10 @@
     <h2>Selectionnez vos épisodes</h2>
     <ul id="episode">
       <li v-for="episode in episodes" :key="episode.id">
-      <span>{{ episode.id }}</span><br/>
       <span>{{ episode.episode }}</span><br/>
+      <span>{{ episode.air_date }}</span><br/>
       <span>{{ episode.name }}</span><br/>
-      <button @click="afficPerso(numPerso())">Personnages</button>
+      <button @click="afficPerso(numPerso(episode))">Personnages</button>
       </li>
     </ul>
   </div>
@@ -30,22 +30,29 @@ export default {
   },
 
   methods: {
-    afficPerso() {
-      axios.get('https://rickandmortyapi.com/api/character/', {
-        params: {
-          name: this.name,
-        }
+    afficPerso(listNumChar) {
+      console.log(listNumChar)
+      let paramChar = listNumChar.tostring()
+      axios.get('https://rickandmortyapi.com/api/character/' + {paramChar}, {
       })
-          .then(response => this.age = response.data.age)
+          .then(response => this.name = response.data.name)
     },
 
-    numPerso() {
+    numPerso(episode) {
       const Number = /[0-9]/g
+      let listNumChar = []
+      console.log('je suis dans ma fonction numPerso()')
+      console.log(episode)
 
-      for (let i = O; i < episode.characters.length(); i++){
+      for (let i = 0; i <= episode.length; i++){
+        console.log('debut de la boucle for')
         let charNumber = episode.characters.macht(Number)
-        return 
+        console.log('je suis dans ma boucle')
+        listNumChar.push(charNumber[i] + ",")
+        console.log(listNumChar)
       }
+      console.log('retour de ma fonction')
+      return listNumChar
     },
 
     reqChar() {
