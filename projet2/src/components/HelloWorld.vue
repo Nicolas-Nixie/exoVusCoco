@@ -7,6 +7,7 @@
       <span>{{ episode.id }}</span><br/>
       <span>{{ episode.episode }}</span><br/>
       <span>{{ episode.name }}</span><br/>
+      <button @click="afficPerso(numPerso())">Personnages</button>
       </li>
     </ul>
   </div>
@@ -28,10 +29,37 @@ export default {
     }
   },
 
-created() {
-  axios.get('https://rickandmortyapi.com/api/episode/1,2,3,4,5,6,7,8,9,10')
-    .then(response => this.episodes = response.data)
-}
+  methods: {
+    afficPerso() {
+      axios.get('https://rickandmortyapi.com/api/character/', {
+        params: {
+          name: this.name,
+        }
+      })
+          .then(response => this.age = response.data.age)
+    },
+
+    numPerso() {
+      const Number = /[0-9]/g
+
+      for (let i = O; i < episode.characters.length(); i++){
+        let charNumber = episode.characters.macht(Number)
+        return 
+      }
+    },
+
+    reqChar() {
+    axios.get('https://rickandmortyapi.com/api/character/')
+      .then(response => this.episodes = response.data)
+  }
+  },
+
+  created() {
+    axios.get('https://rickandmortyapi.com/api/episode/1,2,3,4,5,6,7,8,9,10')
+      .then(response => this.episodes = response.data)
+  },
+
+  
 
 }
 </script>
