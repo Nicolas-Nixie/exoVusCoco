@@ -32,26 +32,20 @@ export default {
   methods: {
     afficPerso(listNumChar) {
       console.log(listNumChar)
-      let paramChar = listNumChar.tostring()
-      axios.get('https://rickandmortyapi.com/api/character/' + {paramChar}, {
-      })
+      let paramChar = listNumChar.join(',')
+      console.log(paramChar)
+      axios.get('https://rickandmortyapi.com/api/character/' + paramChar)
           .then(response => this.name = response.data.name)
     },
 
     numPerso(episode) {
-      const Number = /[0-9]/g
+      const Number = /[0-9]+$/g //regex pas bonne
       let listNumChar = []
-      console.log('je suis dans ma fonction numPerso()')
-      console.log(episode)
 
-      for (let i = 0; i <= episode.length; i++){
-        console.log('debut de la boucle for')
-        let charNumber = episode.characters.macht(Number)
-        console.log('je suis dans ma boucle')
-        listNumChar.push(charNumber[i] + ",")
-        console.log(listNumChar)
+      for (let i = 0; i < episode.characters.length; i++){
+        let charNumber = episode.characters[i].match(Number)
+        listNumChar.push(charNumber[0])
       }
-      console.log('retour de ma fonction')
       return listNumChar
     },
 
