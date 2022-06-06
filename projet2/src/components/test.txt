@@ -1,0 +1,10 @@
+    reqChar(charName) {
+      let tabTempPerso = []
+      console.log('je suis dans dans ma fonction reqChar' )
+      for (let i = 0; i < charName.length; i++) {
+        console.log(charName)
+        tabTempPerso.push(charName[i].name)
+      }
+      let tabPersoFin = tabTempPerso.join(',')
+      return tabPersoFin
+  }

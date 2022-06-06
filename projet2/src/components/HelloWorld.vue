@@ -6,8 +6,9 @@
       <li v-for="episode in episodes" :key="episode.id">
       <span>{{ episode.episode }}</span><br/>
       <span>{{ episode.air_date }}</span><br/>
-      <span>{{ episode.name }}</span><br/>
-      <button @click="afficPerso(numPerso(episode))">Personnages</button>
+      <span>{{ episode.name }}</span><br/><br/>
+      <button @click="afficPerso(numPerso(episode))">Personnages</button><br/>  
+      <span>{{ charName }}</span><br/>
       </li>
     </ul>
   </div>
@@ -25,21 +26,30 @@ export default {
 
   data () {
     return {
-      episodes: []
+      episodes: [],
+      tabPersoFin: null,
+      charName: null
     }
   },
 
   methods: {
-    afficPerso(listNumChar) {
-      console.log(listNumChar)
+    afficPerso(listNumChar, charName) {
+      //let tabTempPerso = []
       let paramChar = listNumChar.join(',')
-      console.log(paramChar)
       axios.get('https://rickandmortyapi.com/api/character/' + paramChar)
-          .then(response => this.name = response.data.name)
+          .then(response => this.charName = response.data)
+      
+    for (let i = 0; i < this.charName.length; i++) {
+        console.log('je suis dans dans ma fonction reqChar' )
+        //tabTempPerso.push(charName[i].this.name)
+      }
+      
+      //tabPersoFin = tabTempPerso.join(',')
+    return /*tabPersoFin*/ charName
     },
 
     numPerso(episode) {
-      const Number = /[0-9]+$/g //regex pas bonne
+      const Number = /[0-9]+$/g
       let listNumChar = []
 
       for (let i = 0; i < episode.characters.length; i++){
@@ -48,11 +58,6 @@ export default {
       }
       return listNumChar
     },
-
-    reqChar() {
-    axios.get('https://rickandmortyapi.com/api/character/')
-      .then(response => this.episodes = response.data)
-  }
   },
 
   created() {
@@ -68,11 +73,11 @@ export default {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 h1 {
-  color: #42b983;
+  color: #06120c;
 }
 h2 {
   margin: 40px 0 0;
-  color: #42b983;
+  color: #06120c;
 }
 ul {
   list-style-type: none;
@@ -81,9 +86,9 @@ ul {
 li {
   display: inline-block;
   margin: 0 10px;
-  color: #42b983
+  color: #06120c
 }
 p {
-  color: #42b983;
+  color: #06120c;
 }
 </style>

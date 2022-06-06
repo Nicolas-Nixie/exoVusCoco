@@ -27,7 +27,7 @@ export default {
 }
 
 body {
-  background: url("./assets/bgRetM.jpg") no-repeat center center
+  background: url("./assets/bgRetM4.jpg") no-repeat center center
     fixed;
   -webkit-background-size: cover;
   -moz-background-size: cover;
