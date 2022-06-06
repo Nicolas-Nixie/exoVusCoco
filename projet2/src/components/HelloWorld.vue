@@ -7,8 +7,8 @@
       <span>{{ episode.episode }}</span><br/>
       <span>{{ episode.air_date }}</span><br/>
       <span>{{ episode.name }}</span><br/><br/>
-      <button @click="afficPerso(numPerso(episode))">Personnages</button><br/>  
-      <span>{{ charName }}</span><br/>
+      <button @click="afficPerso(episode)">Personnages</button><br/><br/>
+      <span>{{ episode.characters_names }}</span><br/>
       </li>
     </ul>
   </div>
@@ -27,25 +27,26 @@ export default {
   data () {
     return {
       episodes: [],
-      tabPersoFin: null,
-      charName: null
+      charNames: []
     }
   },
 
   methods: {
-    afficPerso(listNumChar, charName) {
-      //let tabTempPerso = []
+    afficPerso(episode) {
+
+      let listNumChar = this.numPerso(episode)
+      let tabTempPerso = []
       let paramChar = listNumChar.join(',')
       axios.get('https://rickandmortyapi.com/api/character/' + paramChar)
-          .then(response => this.charName = response.data)
-      
-    for (let i = 0; i < this.charName.length; i++) {
-        console.log('je suis dans dans ma fonction reqChar' )
-        //tabTempPerso.push(charName[i].this.name)
-      }
-      
-      //tabPersoFin = tabTempPerso.join(',')
-    return /*tabPersoFin*/ charName
+          .then((response) => {
+              this.charNames = response.data
+              
+              for (let i = 0; i < this.charNames.length; i++) {
+                tabTempPerso.push(this.charNames[i].name)
+              }
+          episode.characters_names = tabTempPerso
+          this.$forceUpdate() 
+          })   
     },
 
     numPerso(episode) {
